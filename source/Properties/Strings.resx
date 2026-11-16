@@ -75,6 +75,18 @@
   <data name="MenuExit" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="SingleClickAction" xml:space="preserve">
+    <value>Single click action</value>
+  </data>
+  <data name="SingleClickOpen" xml:space="preserve">
+    <value>Open popup</value>
+  </data>
+  <data name="SingleClickSwitch" xml:space="preserve">
+    <value>Switch power modes</value>
+  </data>
+  <data name="ToggleBetween" xml:space="preserve">
+    <value>Toggle between:</value>
+  </data>
   <data name="Autostart" xml:space="preserve">
     <value>Start with Windows</value>
   </data>

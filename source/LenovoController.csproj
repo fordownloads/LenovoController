@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Native.cs" />
+    <Compile Include="AppSettings.cs" />
     <Compile Include="AutoStart.cs" />
     <Compile Include="Localization.cs" />
     <Compile Include="Theme.cs" />

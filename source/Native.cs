@@ -63,8 +63,14 @@ namespace LenovoController
         [DllImport("user32.dll")]
         public static extern bool DestroyMenu(IntPtr menu);
 
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        [DllImport("user32.dll", CharSet = CharSet.Unicode, EntryPoint = "AppendMenuW")]
         public static extern bool AppendMenuW(IntPtr menu, uint flags, uint itemId, string item);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode, EntryPoint = "AppendMenuW")]
+        public static extern bool AppendSubMenuW(IntPtr menu, uint flags, IntPtr submenu, string item);
+
+        [DllImport("user32.dll")]
+        public static extern bool CheckMenuRadioItem(IntPtr menu, uint first, uint last, uint check, uint flags);
 
         [DllImport("user32.dll")]
         public static extern int TrackPopupMenuEx(

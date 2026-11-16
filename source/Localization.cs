@@ -45,6 +45,11 @@ namespace LenovoController
         public static string MenuRefresh => Get("MenuRefresh");
         public static string MenuExit => Get("MenuExit");
 
+        public static string SingleClickAction => Get("SingleClickAction");
+        public static string SingleClickOpen => Get("SingleClickOpen");
+        public static string SingleClickSwitch => Get("SingleClickSwitch");
+        public static string ToggleBetween => Get("ToggleBetween");
+
         public static string Autostart => Get("Autostart");
         public static string AutostartDescription => Get("AutostartDescription");
         public static string AutostartError => Get("AutostartError");

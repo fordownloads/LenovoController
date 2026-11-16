@@ -17,6 +17,7 @@ namespace LenovoController
         private MainWindow _mainWindow;
         private Forms.NotifyIcon _trayIcon;
         private Icon _trayIconImage;
+        private DispatcherTimer _singleClickTimer;
         private DateTime _lastTrayActionAt = DateTime.MinValue;
 
         protected override void OnStartup(StartupEventArgs e)
@@ -24,6 +25,13 @@ namespace LenovoController
             base.OnStartup(e);
 
             Theme.Refresh();
+
+            _singleClickTimer = new DispatcherTimer();
+            _singleClickTimer.Tick += (sender, args) =>
+            {
+                _singleClickTimer.Stop();
+                CyclePowerMode();
+            };
 
             _mainWindow = new MainWindow();
             _mainWindow.PrepareForPopup();
@@ -44,6 +52,7 @@ namespace LenovoController
             };
             _trayIcon.MouseUp += TrayIcon_MouseUp;
             _trayIcon.MouseClick += TrayIcon_LeftClick;
+            _trayIcon.MouseDoubleClick += TrayIcon_MouseDoubleClick;
 
             UpdateTrayIcon();
             _trayIcon.Visible = true;
@@ -120,6 +129,16 @@ namespace LenovoController
                 return;
             _lastTrayActionAt = now;
 
+            if (AppSettings.SingleClickAction == TrayClickAction.SwitchPowerModes)
+            {
+                // Wait briefly so the first half of a double-click does not change the mode.
+                _singleClickTimer.Stop();
+                _singleClickTimer.Interval = TimeSpan.FromMilliseconds(
+                    Math.Max(300, Forms.SystemInformation.DoubleClickTime + 40));
+                _singleClickTimer.Start();
+                return;
+            }
+
             if (_mainWindow.IsVisible)
             {
                 _mainWindow.HidePopup(false);
@@ -131,6 +150,27 @@ namespace LenovoController
                 return;
 
             ShowPopup();
+        }
+
+        private void TrayIcon_MouseDoubleClick(object sender, Forms.MouseEventArgs e)
+        {
+            if (e.Button != Forms.MouseButtons.Left)
+                return;
+
+            _singleClickTimer.Stop();
+            _lastTrayActionAt = DateTime.UtcNow;
+            ShowPopup();
+        }
+
+        private void CyclePowerMode()
+        {
+            var modes = AppSettings.GetToggleModes();
+            if (modes.Length == 0)
+                return;
+
+            var index = Array.IndexOf(modes, _mainWindow.PowerModeState);
+            var next = modes[(index + 1) % modes.Length];
+            _mainWindow.TrySetPowerMode(next);
         }
 
         private void ShowPopup()

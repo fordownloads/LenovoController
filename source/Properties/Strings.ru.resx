@@ -75,6 +75,18 @@
   <data name="MenuExit" xml:space="preserve">
     <value>Выход</value>
   </data>
+  <data name="SingleClickAction" xml:space="preserve">
+    <value>Действие при нажатии</value>
+  </data>
+  <data name="SingleClickOpen" xml:space="preserve">
+    <value>Открыть окно</value>
+  </data>
+  <data name="SingleClickSwitch" xml:space="preserve">
+    <value>Переключать режимы питания</value>
+  </data>
+  <data name="ToggleBetween" xml:space="preserve">
+    <value>Переключать между:</value>
+  </data>
   <data name="Autostart" xml:space="preserve">
     <value>Запускать при входе</value>
   </data>

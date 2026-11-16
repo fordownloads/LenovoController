@@ -437,11 +437,16 @@ namespace LenovoController
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
             const uint mfChecked = 0x00000008;
+            const uint mfSeparator = 0x00000800;
+            const uint mfDisabled = 0x00000002;
+            const uint mfGrayed = 0x00000001;
+            const uint mfPopup = 0x00000010;
             const uint tpmRightAlign = 0x0008;
             const uint tpmNonotify = 0x0080;
             const uint tpmReturnCmd = 0x0100;
 
             var autostartEnabled = AutoStart.IsEnabled();
+            var action = AppSettings.SingleClickAction;
             var menu = Native.CreatePopupMenu();
             if (menu == IntPtr.Zero)
                 return;
@@ -451,6 +456,27 @@ namespace LenovoController
             try
             {
                 Native.AppendMenuW(menu, autostartEnabled ? mfChecked : 0, 1, Localization.Autostart);
+                Native.AppendMenuW(menu, mfSeparator, 0, null);
+
+                var actionMenu = Native.CreatePopupMenu();
+                Native.AppendMenuW(actionMenu, 0, 10, Localization.SingleClickOpen);
+                Native.AppendMenuW(actionMenu, 0, 11, Localization.SingleClickSwitch);
+                Native.CheckMenuRadioItem(actionMenu, 10, 11,
+                    action == TrayClickAction.OpenPopup ? 10u : 11u, 0);
+                Native.AppendSubMenuW(menu, mfPopup, actionMenu, Localization.SingleClickAction);
+
+                Native.AppendMenuW(menu, mfSeparator, 0, null);
+                Native.AppendMenuW(menu, mfDisabled | mfGrayed, 0, Localization.ToggleBetween);
+
+                Native.AppendMenuW(menu,
+                    AppSettings.IsPowerModeEnabled(PowerModeState.Quiet) ? mfChecked : 0,
+                    20, Localization.PowerModeQuiet);
+                Native.AppendMenuW(menu,
+                    AppSettings.IsPowerModeEnabled(PowerModeState.Balance) ? mfChecked : 0,
+                    21, Localization.PowerModeBalanced);
+                Native.AppendMenuW(menu,
+                    AppSettings.IsPowerModeEnabled(PowerModeState.Performance) ? mfChecked : 0,
+                    22, Localization.PowerModePerformance);
 
                 var origin = btnMenu.PointToScreen(
                     new Point(btnMenu.ActualWidth, btnMenu.ActualHeight + 4));
@@ -463,10 +489,25 @@ namespace LenovoController
                     new WindowInteropHelper(this).Handle,
                     IntPtr.Zero);
 
-                if (command == 1 && !AutoStart.SetEnabled(!autostartEnabled))
+                switch (command)
                 {
-                    MessageBox.Show(this, Localization.AutostartError, "Lenovo Controller",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    case 1:
+                        if (!AutoStart.SetEnabled(!autostartEnabled))
+                            MessageBox.Show(this, Localization.AutostartError, "Lenovo Controller",
+                                MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case 10:
+                        AppSettings.SingleClickAction = TrayClickAction.OpenPopup;
+                        break;
+                    case 11:
+                        AppSettings.SingleClickAction = TrayClickAction.SwitchPowerModes;
+                        break;
+                    case 20:
+                    case 21:
+                    case 22:
+                        var mode = (PowerModeState) (command - 20);
+                        AppSettings.SetPowerModeEnabled(mode, !AppSettings.IsPowerModeEnabled(mode));
+                        break;
                 }
             }
             finally
@@ -481,6 +522,25 @@ namespace LenovoController
                 if (!IsActive)
                     HidePopup(false);
             }));
+        }
+
+        internal bool TrySetPowerMode(PowerModeState state)
+        {
+            try
+            {
+                var button = _powerModeButtons[(int) state];
+                if (!button.IsEnabled)
+                    return false;
+
+                button.IsChecked = true;
+                SetPowerModeState(state);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Trace.TraceInformation("Could not set power mode: " + e);
+                return false;
+            }
         }
 
         private void radioPowerMode_Checked(object sender, RoutedEventArgs e)

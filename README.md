@@ -18,6 +18,9 @@ While this program is made with best efforts to be safe, stable, and support all
 
   The app starts quietly in the notification area. Its icon mirrors the active power mode.
 
+  Use the `•••` menu to choose what a single click does: open the popup or cycle through the
+  checked power modes. With the cycling action, double-clicking opens the popup.
+
 - ### Windows 11 native look
 
   Frosted **Mica** backdrop, system light/dark theme.
