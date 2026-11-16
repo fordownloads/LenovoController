@@ -3,8 +3,281 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LenovoController"
              DispatcherUnhandledException="Application_DispatcherUnhandledException"
-             StartupUri="MainWindow.xaml">
+             ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
+        <ResourceDictionary>
+            <FontFamily x:Key="AppFontFamily">Segoe UI Variable Text, Segoe UI</FontFamily>
+            <FontFamily x:Key="IconFontFamily">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
 
+            <SolidColorBrush x:Key="TextPrimaryBrush" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="TextSecondaryBrush" Color="#B3FFFFFF" />
+            <SolidColorBrush x:Key="StrokeBrush" Color="#1FFFFFFF" />
+            <SolidColorBrush x:Key="SegmentBackgroundBrush" Color="#10FFFFFF" />
+            <SolidColorBrush x:Key="HoverBrush" Color="#22FFFFFF" />
+            <SolidColorBrush x:Key="DividerBrush" Color="#18FFFFFF" />
+            <SolidColorBrush x:Key="IconButtonHoverBrush" Color="#1AFFFFFF" />
+            <SolidColorBrush x:Key="AccentBrush" Color="#FF4CC2FF" />
+            <SolidColorBrush x:Key="AccentTextBrush" Color="#FF001B2A" />
+            <SolidColorBrush x:Key="WindowFallbackBrush" Color="#FF202020" />
+
+            <Style x:Key="GroupTitleStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="11" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+                <Setter Property="Margin" Value="3,0,0,0" />
+            </Style>
+
+            <ControlTemplate x:Key="SegmentTemplate" TargetType="{x:Type ToggleButton}">
+                <Grid Background="Transparent">
+                    <Border x:Name="Hover"
+                            Background="{DynamicResource HoverBrush}"
+                            CornerRadius="4"
+                            Opacity="0" />
+                    <Border x:Name="Selected"
+                            Background="#FFFFFFFF"
+                            CornerRadius="4"
+                            Opacity="0">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="7"
+                                              Direction="270"
+                                              Opacity="0.22"
+                                              ShadowDepth="1"
+                                              Color="#000000" />
+                        </Border.Effect>
+                    </Border>
+                    <Border x:Name="Focus"
+                            Background="{DynamicResource HoverBrush}"
+                            CornerRadius="4"
+                            Opacity="0" />
+                    <ContentPresenter Margin="11,4,11,5"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      TextElement.Foreground="{TemplateBinding Foreground}"
+                                      TextElement.FontFamily="{TemplateBinding FontFamily}"
+                                      TextElement.FontSize="{TemplateBinding FontSize}" />
+                </Grid>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Hover"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0:0:0.12" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Hover"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="0"
+                                                     Duration="0:0:0.12" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.35" />
+                        <Setter Property="Cursor" Value="Arrow" />
+                    </Trigger>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Selected"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0:0:0.14" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Selected"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="0"
+                                                     Duration="0:0:0.14" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                        <Setter Property="Foreground" Value="#FF000000" />
+                    </Trigger>
+                    <Trigger Property="IsKeyboardFocused" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Focus"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Focus"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="0"
+                                                     Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+            <Style x:Key="SegmentRadio" TargetType="RadioButton">
+                <Setter Property="FontFamily" Value="{StaticResource AppFontFamily}" />
+                <Setter Property="FontSize" Value="12.5" />
+                <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+                <Setter Property="Template" Value="{StaticResource SegmentTemplate}" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            </Style>
+
+            <Style x:Key="SegmentHostStyle" TargetType="Border">
+                <Setter Property="Background" Value="{DynamicResource SegmentBackgroundBrush}" />
+                <Setter Property="CornerRadius" Value="6" />
+                <Setter Property="Padding" Value="2" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="KeyboardNavigation.TabNavigation" Value="Once" />
+            </Style>
+
+            <Style x:Key="SegmentDividerStyle" TargetType="Border">
+                <Setter Property="Width" Value="1" />
+                <Setter Property="Margin" Value="0,4" />
+                <Setter Property="Background" Value="{DynamicResource DividerBrush}" />
+            </Style>
+
+            <ControlTemplate x:Key="Win11CheckBoxTemplate" TargetType="CheckBox">
+                <Border x:Name="FocusBackground"
+                        Background="Transparent"
+                        CornerRadius="4"
+                        Padding="3,2">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="Box"
+                                Width="18"
+                                Height="18"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                BorderBrush="{DynamicResource TextSecondaryBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4" />
+
+                        <Path x:Name="Check"
+                              Width="10"
+                              Height="8"
+                              Margin="0,1,0,0"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Data="M1,4 L3.8,6.8 L9,1"
+                              Opacity="0"
+                              Stretch="Fill"
+                              Stroke="{DynamicResource AccentTextBrush}"
+                              StrokeEndLineCap="Round"
+                              StrokeLineJoin="Round"
+                              StrokeStartLineCap="Round"
+                              StrokeThickness="1.5" />
+
+                        <ContentPresenter Grid.Column="1"
+                                          Margin="8,0,0,2"
+                                          VerticalAlignment="Center"
+                                          TextElement.FontFamily="{TemplateBinding FontFamily}"
+                                          TextElement.FontSize="{TemplateBinding FontSize}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </Grid>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="Box" Property="Background" Value="{DynamicResource HoverBrush}" />
+                    </Trigger>
+                    <Trigger Property="IsKeyboardFocused" Value="True">
+                        <Setter TargetName="FocusBackground" Property="Background" Value="{DynamicResource HoverBrush}" />
+                    </Trigger>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Check"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Check"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="0"
+                                                     Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                        <Setter TargetName="Box" Property="Background" Value="{DynamicResource AccentBrush}" />
+                        <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.35" />
+                        <Setter Property="Cursor" Value="Arrow" />
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+            <Style x:Key="Win11CheckBox" TargetType="CheckBox">
+                <Setter Property="FontFamily" Value="{StaticResource AppFontFamily}" />
+                <Setter Property="FontSize" Value="12.5" />
+                <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+                <Setter Property="Template" Value="{StaticResource Win11CheckBoxTemplate}" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            </Style>
+
+            <Style x:Key="IconButtonStyle" TargetType="Button">
+                <Setter Property="Width" Value="28" />
+                <Setter Property="Height" Value="28" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="ButtonBackground"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="14">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ButtonBackground"
+                                            Property="Background"
+                                            Value="{DynamicResource IconButtonHoverBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter TargetName="ButtonBackground"
+                                            Property="Background"
+                                            Value="{DynamicResource IconButtonHoverBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Opacity" Value="0.6" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -6,10 +6,25 @@
 
 - Legion 7 2020
 - Ideapad 510S-14ISK
+- LOQ 15iax9e
 
 ## Disclaimer
 
 While this program is made with best efforts to be safe, stable, and support all Lenovo laptops, I cannot guarantee that it won't break something on your device. Use it at your own risk.
+
+## Fork differences
+
+- ### Tray popup
+
+  The app starts quietly in the notification area. Its icon mirrors the active power mode.
+
+- ### Windows 11 native look
+
+  Frosted **Mica** backdrop, system light/dark theme.
+
+- ### Localization support
+
+  Available languages: English, Russian
 
 ## Features
 

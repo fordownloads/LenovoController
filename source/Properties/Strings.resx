@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="HeaderTitle" xml:space="preserve">
+    <value>Power Options</value>
+  </data>
+  <data name="ChargingSection" xml:space="preserve">
+    <value>Charging</value>
+  </data>
+  <data name="AlwaysOnUsbSection" xml:space="preserve">
+    <value>Always on USB</value>
+  </data>
+  <data name="PowerModeSection" xml:space="preserve">
+    <value>Power mode</value>
+  </data>
+  <data name="BatteryConservation" xml:space="preserve">
+    <value>Conservation</value>
+  </data>
+  <data name="BatteryNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="BatteryRapid" xml:space="preserve">
+    <value>Rapid charge</value>
+  </data>
+  <data name="UsbOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="UsbOnSleep" xml:space="preserve">
+    <value>On sleep</value>
+  </data>
+  <data name="UsbAlways" xml:space="preserve">
+    <value>Always</value>
+  </data>
+  <data name="PowerModeQuiet" xml:space="preserve">
+    <value>Quiet</value>
+  </data>
+  <data name="PowerModeBalanced" xml:space="preserve">
+    <value>Balanced</value>
+  </data>
+  <data name="PowerModePerformance" xml:space="preserve">
+    <value>Performance</value>
+  </data>
+  <data name="OverDrive" xml:space="preserve">
+    <value>Over drive</value>
+  </data>
+  <data name="FnLock" xml:space="preserve">
+    <value>Fn lock</value>
+  </data>
+  <data name="TouchpadLock" xml:space="preserve">
+    <value>Touchpad lock</value>
+  </data>
+  <data name="RefreshTooltip" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="MoreTooltip" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="MenuOpen" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="MenuRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Autostart" xml:space="preserve">
+    <value>Start with Windows</value>
+  </data>
+  <data name="AutostartDescription" xml:space="preserve">
+    <value>Starts Lenovo Controller when you sign in.</value>
+  </data>
+  <data name="AutostartError" xml:space="preserve">
+    <value>Could not update the autostart task.</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="TrayTooltipFormat" xml:space="preserve">
+    <value>Lenovo Controller - {0}</value>
+  </data>
+</root>

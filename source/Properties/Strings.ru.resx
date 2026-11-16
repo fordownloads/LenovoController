@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="HeaderTitle" xml:space="preserve">
+    <value>Параметры питания</value>
+  </data>
+  <data name="ChargingSection" xml:space="preserve">
+    <value>Зарядка</value>
+  </data>
+  <data name="AlwaysOnUsbSection" xml:space="preserve">
+    <value>USB всегда включён</value>
+  </data>
+  <data name="PowerModeSection" xml:space="preserve">
+    <value>Режим питания</value>
+  </data>
+  <data name="BatteryConservation" xml:space="preserve">
+    <value>Защита АКБ</value>
+  </data>
+  <data name="BatteryNormal" xml:space="preserve">
+    <value>Обычная</value>
+  </data>
+  <data name="BatteryRapid" xml:space="preserve">
+    <value>Быстрая</value>
+  </data>
+  <data name="UsbOff" xml:space="preserve">
+    <value>Выключен</value>
+  </data>
+  <data name="UsbOnSleep" xml:space="preserve">
+    <value>Во сне</value>
+  </data>
+  <data name="UsbAlways" xml:space="preserve">
+    <value>Всегда</value>
+  </data>
+  <data name="PowerModeQuiet" xml:space="preserve">
+    <value>Тихий</value>
+  </data>
+  <data name="PowerModeBalanced" xml:space="preserve">
+    <value>Баланс</value>
+  </data>
+  <data name="PowerModePerformance" xml:space="preserve">
+    <value>Турбо</value>
+  </data>
+  <data name="OverDrive" xml:space="preserve">
+    <value>OverDrive</value>
+  </data>
+  <data name="FnLock" xml:space="preserve">
+    <value>Fn Lock</value>
+  </data>
+  <data name="TouchpadLock" xml:space="preserve">
+    <value>Выкл. тачпад</value>
+  </data>
+  <data name="RefreshTooltip" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="MoreTooltip" xml:space="preserve">
+    <value>Ещё</value>
+  </data>
+  <data name="MenuOpen" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
+  <data name="MenuRefresh" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>Выход</value>
+  </data>
+  <data name="Autostart" xml:space="preserve">
+    <value>Запускать при входе</value>
+  </data>
+  <data name="AutostartDescription" xml:space="preserve">
+    <value>Запускает Lenovo Controller при входе в систему.</value>
+  </data>
+  <data name="AutostartError" xml:space="preserve">
+    <value>Не удалось изменить задачу автозапуска.</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="TrayTooltipFormat" xml:space="preserve">
+    <value>Lenovo Controller — {0}</value>
+  </data>
+</root>
